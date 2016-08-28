@@ -1,0 +1,40 @@
+{
+  "name": "gulp-rev-style-url",
+  "version": "0.1.0",
+  "description": "The lightweight plugin to override urls in css files to hashed after gulp-rev",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/galkinrost/gulp-rev-css-url"
+  },
+  "keywords": [
+    "gulpplugin",
+    "rev",
+    "revision",
+    "hash",
+    "optimize",
+    "version",
+    "versioning",
+    "cache",
+    "expire",
+    "static",
+    "asset",
+    "assets",
+    "gulp-rev"
+  ],
+  "devDependencies": {
+    "gulp": "~3.6.2",
+    "gulp-rev": "~5.0.0",
+    "mocha": "~1.20.0",
+    "gulp-jshint": "~1.6.1",
+    "fs-extra": "~0.9.1",
+    "chai": "~1.9.1"
+  },
+  "dependencies": {
+    "crypto": "0.0.3",
+    "gulp-util": "~2.2.14",
+    "through2": "~0.4.2"
+  },
+  "scripts": {
+    "test": "mocha test.js -R list"
+  }
+}
