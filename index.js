@@ -27,6 +27,10 @@ module.exports = function override() {
     return through.obj(function (file, enc, cb) {
         var firstFile = null;
 
+        file.skipHash = !file.revOrigPath;
+        file.revOrigPath = file.revOrigPath || file.path;
+        file.revOrigBase = file.revOrigBase || file.base;
+
         if (file.path && file.revOrigPath) {
             firstFile = firstFile || file;
             var _relPath = relPath(path.resolve(firstFile.revOrigBase), file.revOrigPath);
@@ -63,11 +67,13 @@ module.exports = function override() {
 
                 file.contents = new Buffer(contents);
 
-                // update file's hash as it does in gulp-rev plugin
-                var hash = file.revHash = md5(contents).slice(0, 10);
-                var ext = path.extname(file.path);
-                var filename = path.basename(file.revOrigPath, ext) + '-' + hash + ext;
-                file.path = path.join(path.dirname(file.path), filename);
+                if (!file.skipHash) {
+                    // update file's hash as it does in gulp-rev plugin
+                    var hash = file.revHash = md5(contents).slice(0, 10);
+                    var ext = path.extname(file.path);
+                    var filename = path.basename(file.revOrigPath, ext) + '-' + hash + ext;
+                    file.path = path.join(path.dirname(file.path), filename);
+                }
 
             }
             self.push(file);
